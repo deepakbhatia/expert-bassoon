@@ -26,18 +26,22 @@ const CreateCampaign = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    // await createCampaign({ ...form, target: ethers.utils.parseUnits(form.target, 18)})
+    // setIsLoading(false);
+    // navigate('/');
     checkIfImage(form.image, async (exists) => {
-      if(exists) {
+     // if(exists)
+      {
         setIsLoading(true)
         await createCampaign({ ...form, target: ethers.utils.parseUnits(form.target, 18)})
         setIsLoading(false);
         navigate('/');
-      } else {
-        alert('Provide valid image URL')
-        setForm({ ...form, image: '' });
       }
-    })
+      // else {
+      //   alert('Provide valid image URL')
+      //   setForm({ ...form, image: '' });
+      // }
+   })
   }
 
   return (

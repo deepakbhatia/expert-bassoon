@@ -14,18 +14,18 @@ const CampaignDetails = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [amount, setAmount] = useState('');
-  const [donators, setDonators] = useState([]);
+  const [donors, setDonors] = useState([]);
 
   const remainingDays = daysLeft(state.deadline);
 
-  const fetchDonators = async () => {
+  const fetchDonors = async () => {
     const data = await getDonations(state.pId);
 
-    setDonators(data);
+    setDonors(data);
   }
 
   useEffect(() => {
-    if(contract) fetchDonators();
+    if(contract) fetchDonors();
   }, [contract, address])
 
   const handleDonate = async () => {
@@ -53,7 +53,7 @@ const CampaignDetails = () => {
         <div className="flex md:w-[150px] w-full flex-wrap justify-between gap-[30px]">
           <CountBox title="Days Left" value={remainingDays} />
           <CountBox title={`Raised of ${state.target}`} value={state.amountCollected} />
-          <CountBox title="Total Backers" value={donators.length} />
+          <CountBox title="Total Backers" value={donors.length} />
         </div>
       </div>
 
@@ -82,16 +82,16 @@ const CampaignDetails = () => {
           </div>
 
           <div>
-            <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">Donators</h4>
+            <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">Donors</h4>
 
               <div className="mt-[20px] flex flex-col gap-4">
-                {donators.length > 0 ? donators.map((item, index) => (
+                {donors.length > 0 ? donors.map((item, index) => (
                   <div key={`${item.donator}-${index}`} className="flex justify-between items-center gap-4">
                     <p className="font-epilogue font-normal text-[16px] text-[#b2b3bd] leading-[26px] break-ll">{index + 1}. {item.donator}</p>
                     <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] break-ll">{item.donation}</p>
                   </div>
                 )) : (
-                  <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] text-justify">No donators yet. Be the first one!</p>
+                  <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] text-justify">No donors yet. Be the first one!</p>
                 )}
               </div>
           </div>
